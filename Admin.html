@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Admin Upload Answer Key</h2>
+<input type="file" id="ak" accept=".pdf,.jpg,.png">
+<button onclick="pub()">Publish</button>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+async function pub(){
+  const file = document.getElementById('ak').files[0];
+  const { data:{ text } } = await Tesseract.recognize(file,'eng');
+  localStorage.setItem("answerkey", text);
+  alert("Answer key published!");
+}
+</script>
+</body>
+</html>
