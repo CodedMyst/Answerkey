@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instant Answer Key Checker – Railway, SSC, NEET 2026</title>
+  <meta name="description" content="Check your Railway, SSC, NEET 2026 exam score instantly. Upload question paper and answer key to generate results online." />
+  <meta name="keywords" content="Railway answer key 2026, RRB NTPC answer key, SSC CGL answer key, NEET answer key 2026, instant exam answer checker" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<h1>Instant Exam Answer Key Checker 2026</h1>
+<p>Upload your question paper and answer key for Railway, SSC, NEET exams and get your score instantly.</p>
+
+<input type="file" id="qp" accept=".pdf,.jpg,.png">
+<p id="status"></p>
+
+<script>
+document.getElementById('qp').onchange = async function(){
+  document.getElementById('status').innerText="Reading question paper...";
+  const file = this.files[0];
+  const { data:{ text } } = await Tesseract.recognize(file, 'eng');
+  localStorage.setItem("questions", text);
+  document.getElementById('status').innerText=
+    "Question paper uploaded. Answer key will be released soon.";
+};
+</script>
+
+<h2>Supported Exams:</h2>
+<ul>
+<li>Railway RRB NTPC / Group D</li>
+<li>SSC CGL / CHSL / MTS</li>
+<li>NEET UG 2026</li>
+</ul>
+
+</body>
+</html>
