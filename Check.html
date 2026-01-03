@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Check Score</h2>
+<textarea id="user" rows="10" cols="30" placeholder="1 A\n2 B"></textarea><br>
+<button onclick="chk()">Check</button>
+<div id="res"></div>
+
+<script>
+function parse(t){
+  let o={};
+  t.split(/\n+/).forEach(l=>{
+    let m=l.match(/(\d+)\s*([A-D])/i);
+    if(m) o[m[1]]=m[2];
+  });
+  return o;
+}
+
+function chk(){
+  let k = localStorage.getItem("answerkey");
+  if(!k){ alert("Answer key not released yet"); return; }
+  let u=parse(user.value);
+  let a=parse(k);
+  let c=0;
+  for(let i in a) if(u[i]==a[i]) c++;
+  res.innerHTML="Score: "+c+"/"+Object.keys(a).length;
+}
+</script>
+</body>
+</html>
